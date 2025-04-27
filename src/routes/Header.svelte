@@ -2,7 +2,7 @@
 	import { page } from '$app/state';
 </script>
 
-<header>
+<header class="border-b border-gray-200">
 	<div class="mx-auto px-4 sm:px-6 lg:px-8">
 		<div class="flex justify-between items-center h-16">
 			<!-- Logo -->

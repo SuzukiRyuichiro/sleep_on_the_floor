@@ -4,6 +4,7 @@
 	import { onMount, onDestroy } from 'svelte';
 	import { PUBLIC_MAPBOX_API_KEY } from '$env/static/public';
 	import Card from '$lib/components/Card.svelte';
+	import Footer from '$lib/components/Footer.svelte';
 
 	const { Map } = mapbox;
 
@@ -106,20 +107,20 @@
 	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
-<main class="flex h-screen">
-	<div class="w-2/5 p-6 overflow-y-auto">
-		<div class="grid grid-cols-2 gap-6">
-			{#each listings as listing}
-				<Card {...listing} />
-			{/each}
+<main class="flex h-full">
+	<div class="w-2/5 flex flex-col overflow-y-scroll">
+		<div class="flex-1 overflow-y-auto p-6">
+			<div class="grid grid-cols-2 gap-6 mb-4">
+				{#each listings as listing}
+					<Card {...listing} />
+				{/each}
+			</div>
+			<Footer>
+				<p>
+					Made by <a href="https://ryuichirosuzuki.com" class="font-bold">Scooter</a> 🛵
+				</p>
+			</Footer>
 		</div>
 	</div>
-	<div class="w-3/5 h-screen sticky top-0" bind:this={mapContainer}></div>
+	<div class="w-3/5 sticky top-0" bind:this={mapContainer}></div>
 </main>
-
-<style>
-	main {
-		display: flex;
-		height: 100vh;
-	}
-</style>

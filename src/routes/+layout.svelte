@@ -1,55 +1,15 @@
 <script lang="ts">
 	import Header from './Header.svelte';
+	import Footer from '$lib/components/Footer.svelte';
 	import '../app.css';
 
-	let { children } = $props();
+	let { children, data } = $props();
 </script>
 
-<div class="app">
+<div class="flex flex-col min-h-screen bg-primary h-screen max-h-screen">
 	<Header />
 
-	<main>
+	<main class="flex-1 flex flex-col w-full h-100 mx-auto box-border">
 		{@render children()}
 	</main>
-
-	<footer>
-		<p>
-			Made by <a href="https://ryuichirosuzuki.com">Scooter</a> 🛵
-		</p>
-	</footer>
 </div>
-
-<style>
-	.app {
-		display: flex;
-		flex-direction: column;
-		min-height: 100vh;
-	}
-
-	main {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		width: 100%;
-		margin: 0 auto;
-		box-sizing: border-box;
-	}
-
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 12px;
-	}
-
-	footer a {
-		font-weight: bold;
-	}
-
-	@media (min-width: 480px) {
-		footer {
-			padding: 12px 0;
-		}
-	}
-</style>
