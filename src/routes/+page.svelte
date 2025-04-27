@@ -109,7 +109,7 @@
 	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
-<main class="flex h-full min-h-screen">
+<main class="flex h-full">
 	<!-- Desktop/Tablet: Sidebar Cards -->
 	<div class="hidden md:flex w-2/5 flex-col overflow-y-scroll">
 		<div class="flex-1 overflow-y-auto p-6">
@@ -127,7 +127,7 @@
 	</div>
 
 	<!-- Map: always visible, full screen on mobile -->
-	<div class="w-full md:w-3/5 sticky top-0 h-screen" bind:this={mapContainer}></div>
+	<div class="w-full md:w-3/5 sticky top-0 grow-1" bind:this={mapContainer}></div>
 
 	<!-- Mobile: Scrollable Card Overlay (Drawer) -->
 	<div class="fixed inset-0 z-30 flex flex-col justify-end md:hidden pointer-events-none">
