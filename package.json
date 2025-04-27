@@ -41,7 +41,9 @@
 		"vite": "^6.2.6"
 	},
 	"dependencies": {
-		"@inlang/paraglide-js": "^2.0.0"
+		"@inlang/paraglide-js": "^2.0.0",
+		"@types/mapbox-gl": "^3.4.1",
+		"mapbox-gl": "^3.11.1"
 	},
 	"packageManager": "yarn@4.6.0+sha224.acd0786f07ffc6c933940eb65fc1d627131ddf5455bddcc295dc90fd"
 }
