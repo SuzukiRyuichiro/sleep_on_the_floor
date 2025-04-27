@@ -1,7 +1,5 @@
 <script lang="ts">
-	import Counter from './Counter.svelte';
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import welcomeFallback from '$lib/images/svelte-welcome.png';
+	let counter = 0;
 </script>
 
 <svelte:head>
@@ -10,22 +8,9 @@
 </svelte:head>
 
 <section>
-	<h1>
-		<span class="welcome">
-			<picture>
-				<source srcset={welcome} type="image/webp" />
-				<img src={welcomeFallback} alt="Welcome" />
-			</picture>
-		</span>
-
-		to your new<br />SvelteKit app
-	</h1>
-
-	<h2>
-		try editing <strong>src/routes/+page.svelte</strong>
-	</h2>
-
-	<Counter />
+	<h1>Hey</h1>
+	<h1>{counter}</h1>
+	<button on:click={() => (counter += 1)}>+</button>
 </section>
 
 <style>

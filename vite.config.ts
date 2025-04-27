@@ -11,5 +11,12 @@ export default defineConfig({
 			project: './project.inlang',
 			outdir: './src/lib/paraglide'
 		})
-	]
+	],
+	server: {
+		fs: {
+			allow: [
+				'.yarn/__virtual__'
+			]
+		}
+	}
 });
