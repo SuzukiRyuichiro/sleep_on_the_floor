@@ -84,6 +84,8 @@
 		}
 	];
 
+	let showMobileCards = false;
+
 	onMount(() => {
 		if (mapContainer) {
 			map = new Map({
@@ -107,8 +109,9 @@
 	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
-<main class="flex h-full">
-	<div class="w-2/5 flex flex-col overflow-y-scroll">
+<main class="flex h-full min-h-screen">
+	<!-- Desktop/Tablet: Sidebar Cards -->
+	<div class="hidden md:flex w-2/5 flex-col overflow-y-scroll">
 		<div class="flex-1 overflow-y-auto p-6">
 			<div class="grid grid-cols-2 gap-6 mb-4">
 				{#each listings as listing}
@@ -122,5 +125,31 @@
 			</Footer>
 		</div>
 	</div>
-	<div class="w-3/5 sticky top-0" bind:this={mapContainer}></div>
+
+	<!-- Map: always visible, full screen on mobile -->
+	<div class="w-full md:w-3/5 sticky top-0 h-screen" bind:this={mapContainer}></div>
+
+	<!-- Mobile: Scrollable Card Overlay (Drawer) -->
+	<div class="fixed inset-0 z-30 flex flex-col justify-end md:hidden pointer-events-none">
+		<div class="flex-1 pointer-events-none"></div>
+		<div
+			class="bg-white rounded-t-2xl shadow-2xl max-h-[80vh] min-h-12 h-12 overflow-y-auto p-0 pointer-events-auto transition-all duration-300"
+		>
+			<div class="flex flex-col items-center">
+				<div class="w-12 h-1.5 bg-gray-300 rounded-full mt-2 mb-2"></div>
+			</div>
+			<div class="flex flex-col gap-4 px-4 pb-4 pt-0">
+				{#each listings as listing}
+					<Card {...listing} />
+				{/each}
+			</div>
+			<div class="mt-4 px-4">
+				<Footer>
+					<p>
+						Made by <a href="https://ryuichirosuzuki.com" class="font-bold">Scooter</a> 🛵
+					</p>
+				</Footer>
+			</div>
+		</div>
+	</div>
 </main>
