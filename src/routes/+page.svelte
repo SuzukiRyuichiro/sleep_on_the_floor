@@ -5,6 +5,7 @@
 	import { PUBLIC_MAPBOX_API_KEY } from '$env/static/public';
 	import Card from '$lib/components/Card.svelte';
 	import Footer from '$lib/components/Footer.svelte';
+	import { listings } from '$lib/data/listings';
 
 	const { Map } = mapbox;
 
@@ -15,74 +16,6 @@
 	let zoom = 9;
 
 	let initialState = { lng, lat, zoom };
-
-	// Sample data for cards
-	const listings = [
-		{
-			id: 1,
-			title: 'Modern Loft in Downtown',
-			imageUrl: 'https://picsum.photos/400/400?random=1',
-			price: 120,
-			rating: 4.8,
-			location: 'Boston, MA'
-		},
-		{
-			id: 2,
-			title: 'Cozy Apartment with View',
-			imageUrl: 'https://picsum.photos/400/400?random=2',
-			price: 95,
-			rating: 4.9,
-			location: 'Cambridge, MA'
-		},
-		{
-			id: 3,
-			title: 'Historic Brownstone',
-			imageUrl: 'https://picsum.photos/400/400?random=3',
-			price: 150,
-			rating: 4.7,
-			location: 'Brookline, MA'
-		},
-		{
-			id: 4,
-			title: 'Waterfront Studio',
-			imageUrl: 'https://picsum.photos/400/400?random=4',
-			price: 110,
-			rating: 4.6,
-			location: 'Boston, MA'
-		},
-		{
-			id: 5,
-			title: 'Charming Cottage in Suburbs',
-			imageUrl: 'https://picsum.photos/400/400?random=5',
-			price: 130,
-			rating: 4.5,
-			location: 'Newton, MA'
-		},
-		{
-			id: 6,
-			title: 'Luxury Penthouse with Views',
-			imageUrl: 'https://picsum.photos/400/400?random=6',
-			price: 250,
-			rating: 4.9,
-			location: 'Boston, MA'
-		},
-		{
-			id: 7,
-			title: 'Renovated Townhouse',
-			imageUrl: 'https://picsum.photos/400/400?random=7',
-			price: 180,
-			rating: 4.7,
-			location: 'Somerville, MA'
-		},
-		{
-			id: 8,
-			title: 'Seaside Condo',
-			imageUrl: 'https://picsum.photos/400/400?random=8',
-			price: 160,
-			rating: 4.8,
-			location: 'Quincy, MA'
-		}
-	];
 
 	let showMobileCards = false;
 

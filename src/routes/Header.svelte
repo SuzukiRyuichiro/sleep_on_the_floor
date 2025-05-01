@@ -8,7 +8,10 @@
 		<div class="flex justify-between items-center h-16">
 			<!-- Logo -->
 			<div class="flex-shrink-0">
-				<a href="/" class="text-2xl">🏕️</a>
+				<a href="/" class="text-2xl">
+					<span>🏕️</span>
+					<span class="hidden sm:inline">Sleep on the Floor</span>
+				</a>
 			</div>
 
 			<!-- Navigation -->
@@ -43,6 +46,7 @@
 				<div class="md:hidden flex items-center">
 					<button
 						type="button"
+						aria-label="Toggle menu"
 						class="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-gray-900 focus:outline-none"
 						on:click={() => (showMenu = !showMenu)}
 					>
