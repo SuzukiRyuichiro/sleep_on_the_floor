@@ -7,15 +7,12 @@
 	import Footer from '$lib/components/Footer.svelte';
 	import { listings } from '$lib/data/listings';
 
-	const { Map } = mapbox;
+	const { Map, Marker } = mapbox;
 
 	let map: mapbox.Map | undefined;
 	let mapContainer: HTMLDivElement | undefined;
-	let lng = -71.224518;
-	let lat = 42.213995;
-	let zoom = 9;
-
-	let initialState = { lng, lat, zoom };
+	let markers: mapbox.Marker[] = [];
+	let bounds: mapbox.LngLatBounds | undefined;
 
 	let showMobileCards = false;
 
@@ -24,14 +21,68 @@
 			map = new Map({
 				container: mapContainer,
 				accessToken: PUBLIC_MAPBOX_API_KEY,
-				center: [initialState.lng, initialState.lat],
-				zoom: initialState.zoom
+				style: 'mapbox://styles/mapbox/outdoors-v12',
+				center: [138.0, 36.0], // Center of Nagano prefecture
+				zoom: 8,
+				pitch: 0, // Disable 3D tilt
+				bearing: 0, // Disable rotation
+				dragRotate: false, // Disable rotation with drag
+				touchPitch: false, // Disable pitch on touch devices
+				touchZoomRotate: {
+					around: 'center',
+					rotate: false // Disable rotation on touch devices
+				}
+			});
+
+			// Wait for map to load
+			map.on('load', () => {
+				// Create bounds object
+				bounds = new mapbox.LngLatBounds();
+
+				// Add markers for each listing with coordinates
+				listings.forEach((listing) => {
+					if (listing.coordinates) {
+						const { lat, lng } = listing.coordinates;
+						const el = document.createElement('div');
+						el.className = 'marker';
+						el.innerHTML = '⛺️';
+						el.style.fontSize = '24px';
+						el.style.cursor = 'pointer';
+
+						const marker = new Marker({ element: el })
+							.setLngLat([lng, lat])
+							.setPopup(
+								new mapbox.Popup({ offset: 25 }).setHTML(`
+										<div class="w-48">
+											<img src="${listing.imageUrl}" alt="${listing.title}" class="w-full h-32 object-cover rounded-t-lg" />
+											<div class="p-2">
+												<h3 class="font-bold text-sm">${listing.title}</h3>
+											</div>
+										</div>
+									`)
+							)
+							.addTo(map!);
+
+						markers.push(marker);
+						bounds!.extend([lng, lat]);
+					}
+				});
+
+				// Fit map to show all markers with padding
+				if (bounds && !bounds.isEmpty()) {
+					map!.fitBounds(bounds, {
+						padding: 50,
+						maxZoom: 12
+					});
+				}
 			});
 		}
 	});
 
 	onDestroy(() => {
 		if (map) {
+			// Remove all markers
+			markers.forEach((marker) => marker.remove());
 			map.remove();
 		}
 	});
