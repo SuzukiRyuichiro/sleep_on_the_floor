@@ -6,21 +6,21 @@
 	export let location: string;
 </script>
 
-<div
-	class="w-full rounded-xl overflow-hidden shadow-sm transition-transform duration-200 cursor-pointer hover:scale-102"
+<a
+	href="#"
+	class="card preset-filled-surface-100-900 border-[1px] border-surface-200-800 card-hover divide-surface-200-800 block max-w-md divide-y overflow-hidden"
 >
-	<div class="relative w-full pb-[100%]">
-		<img src={imageUrl} alt={title} class="absolute top-0 left-0 w-full h-full object-cover" />
-	</div>
-	<div class="p-3">
-		<div class="flex justify-between items-center mb-1">
-			<h3 class="m-0 text-base font-semibold">{title}</h3>
-			<div class="flex items-center gap-1">
-				<span>★</span>
-				<span>{rating}</span>
-			</div>
+	<header>
+		<img src={imageUrl} class="aspect-[21/9] w-full object-cover" alt={title} />
+	</header>
+	<article class="space-y-4 p-4">
+		<div>
+			<h3 class="h6">{title}</h3>
 		</div>
-		<p class="text-secondary text-sm my-1">{location}</p>
-		<p class="font-semibold my-1">${price} night</p>
-	</div>
-</div>
+		<p class="text-sm opacity-60">{location}</p>
+	</article>
+	<footer class="flex items-center justify-between gap-4 p-4">
+		<small class="opacity-60">${price} night</small>
+		<small class="opacity-60">★ {rating}</small>
+	</footer>
+</a>
