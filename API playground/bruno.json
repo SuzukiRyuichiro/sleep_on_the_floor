@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "API playground",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

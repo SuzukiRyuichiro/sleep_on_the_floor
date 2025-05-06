@@ -1,0 +1,15 @@
+meta {
+  name: Get locations
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{base_url}}/api/collections/locations/records
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
