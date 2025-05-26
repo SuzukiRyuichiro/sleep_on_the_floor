@@ -6,6 +6,11 @@
 	import Card from '$lib/components/Card.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import { listings } from '$lib/data/listings';
+	import Intercom from '@intercom/messenger-js-sdk';
+
+	Intercom({
+		app_id: 'ayhkrqtb'
+	});
 
 	const { Map, Marker } = mapbox;
 

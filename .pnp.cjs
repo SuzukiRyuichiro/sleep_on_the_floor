@@ -31,6 +31,7 @@ const RAW_RUNTIME_STATE =
           ["@eslint/js", "npm:9.25.1"],\
           ["@fontsource/fira-mono", "npm:5.2.5"],\
           ["@inlang/paraglide-js", "npm:2.0.12"],\
+          ["@intercom/messenger-js-sdk", "npm:0.0.14"],\
           ["@neoconfetti/svelte", "virtual:05be20534739cf51979039904a5659ea4add968540770d69606ce5bf00df0714123a403729245d009820b611c2519db048d026c8ed1e2eac14d3f66fab22a039#npm:2.2.2"],\
           ["@playwright/test", "npm:1.52.0"],\
           ["@skeletonlabs/skeleton", "virtual:05be20534739cf51979039904a5659ea4add968540770d69606ce5bf00df0714123a403729245d009820b611c2519db048d026c8ed1e2eac14d3f66fab22a039#npm:3.1.3"],\
@@ -779,6 +780,15 @@ const RAW_RUNTIME_STATE =
           ["kysely", "npm:0.27.6"],\
           ["sqlite-wasm-kysely", "virtual:68816fd9d211f7031053b05c013702143818d37c1fea054dbedb8f30ebfdcd7f83c5a03ee7641490df84bc589070363cf53922d7d031f842835467793d8c4bc5#npm:0.3.0"],\
           ["uuid", "npm:10.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@intercom/messenger-js-sdk", [\
+      ["npm:0.0.14", {\
+        "packageLocation": "../../../.yarn/berry/cache/@intercom-messenger-js-sdk-npm-0.0.14-da30fa63bc-10c0.zip/node_modules/@intercom/messenger-js-sdk/",\
+        "packageDependencies": [\
+          ["@intercom/messenger-js-sdk", "npm:0.0.14"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -5523,6 +5533,7 @@ const RAW_RUNTIME_STATE =
           ["@eslint/js", "npm:9.25.1"],\
           ["@fontsource/fira-mono", "npm:5.2.5"],\
           ["@inlang/paraglide-js", "npm:2.0.12"],\
+          ["@intercom/messenger-js-sdk", "npm:0.0.14"],\
           ["@neoconfetti/svelte", "virtual:05be20534739cf51979039904a5659ea4add968540770d69606ce5bf00df0714123a403729245d009820b611c2519db048d026c8ed1e2eac14d3f66fab22a039#npm:2.2.2"],\
           ["@playwright/test", "npm:1.52.0"],\
           ["@skeletonlabs/skeleton", "virtual:05be20534739cf51979039904a5659ea4add968540770d69606ce5bf00df0714123a403729245d009820b611c2519db048d026c8ed1e2eac14d3f66fab22a039#npm:3.1.3"],\

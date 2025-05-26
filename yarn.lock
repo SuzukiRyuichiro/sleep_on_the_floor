@@ -617,6 +617,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@intercom/messenger-js-sdk@npm:^0.0.14":
+  version: 0.0.14
+  resolution: "@intercom/messenger-js-sdk@npm:0.0.14"
+  checksum: 10c0/b5873e85938380534c3887a0fc8d2c91f4bbd819e9b25d38e07e6985c3562905e694e6f9399d778ef744b712739cad1263a4a5655a5ee213f342a1929d44d77f
+  languageName: node
+  linkType: hard
+
 "@isaacs/cliui@npm:^8.0.2":
   version: 8.0.2
   resolution: "@isaacs/cliui@npm:8.0.2"
@@ -4659,6 +4666,7 @@ __metadata:
     "@eslint/js": "npm:^9.18.0"
     "@fontsource/fira-mono": "npm:^5.0.0"
     "@inlang/paraglide-js": "npm:^2.0.0"
+    "@intercom/messenger-js-sdk": "npm:^0.0.14"
     "@neoconfetti/svelte": "npm:^2.0.0"
     "@playwright/test": "npm:^1.52.0"
     "@skeletonlabs/skeleton": "npm:^3.1.3"
