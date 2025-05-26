@@ -6,11 +6,6 @@
 	import Card from '$lib/components/Card.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import { listings } from '$lib/data/listings';
-	import Intercom from '@intercom/messenger-js-sdk';
-
-	Intercom({
-		app_id: 'ayhkrqtb'
-	});
 
 	const { Map, Marker } = mapbox;
 
@@ -22,6 +17,18 @@
 	let showMobileCards = false;
 
 	onMount(() => {
+		// Dynamically import Intercom only on the client
+		if (typeof window !== 'undefined') {
+			import('@intercom/messenger-js-sdk').then((module) => {
+				const Intercom = module.default;
+				if (typeof Intercom === 'function') {
+					Intercom({
+						app_id: 'ayhkrqtb'
+					});
+				}
+			});
+		}
+
 		if (mapContainer) {
 			map = new Map({
 				container: mapContainer,
