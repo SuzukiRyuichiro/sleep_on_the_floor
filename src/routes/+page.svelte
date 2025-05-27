@@ -17,18 +17,6 @@
 	let showMobileCards = false;
 
 	onMount(() => {
-		// Dynamically import Intercom only on the client
-		if (typeof window !== 'undefined') {
-			import('@intercom/messenger-js-sdk').then((module) => {
-				const Intercom = module.default;
-				if (typeof Intercom === 'function') {
-					Intercom({
-						app_id: 'ayhkrqtb'
-					});
-				}
-			});
-		}
-
 		if (mapContainer) {
 			map = new Map({
 				container: mapContainer,
