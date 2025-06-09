@@ -14,9 +14,65 @@
 	let markers: mapbox.Marker[] = [];
 	let bounds: mapbox.LngLatBounds | undefined;
 
-	let showMobileCards = false;
+	// Drawer state management
+	let drawerElement: HTMLDivElement | undefined;
+	let isDrawerExpanded = false;
+	let isDragging = false;
+	let startY = 0;
+	let startHeight = 0;
+	let currentHeight = 80; // Initial collapsed height in pixels
+
+	const minHeight = 80;
+	let maxHeight = 600; // Default value for SSR
+
+	function handleTouchStart(event: TouchEvent) {
+		isDragging = true;
+		startY = event.touches[0].clientY;
+		startHeight = currentHeight;
+		event.preventDefault();
+	}
+
+	function handleTouchMove(event: TouchEvent) {
+		if (!isDragging) return;
+		
+		const deltaY = startY - event.touches[0].clientY;
+		const newHeight = Math.max(minHeight, Math.min(maxHeight, startHeight + deltaY));
+		currentHeight = newHeight;
+		
+		// Update expanded state based on height
+		isDrawerExpanded = currentHeight > minHeight + 50;
+		event.preventDefault();
+	}
+
+	function handleTouchEnd() {
+		if (!isDragging) return;
+		isDragging = false;
+		
+		// Snap to collapsed or expanded state
+		if (currentHeight < maxHeight * 0.3) {
+			currentHeight = minHeight;
+			isDrawerExpanded = false;
+		} else {
+			currentHeight = maxHeight;
+			isDrawerExpanded = true;
+		}
+	}
+
+	function toggleDrawer() {
+		if (isDrawerExpanded) {
+			currentHeight = minHeight;
+			isDrawerExpanded = false;
+		} else {
+			currentHeight = maxHeight;
+			isDrawerExpanded = true;
+		}
+	}
 
 	onMount(() => {
+		// Set maxHeight based on actual window height
+		maxHeight = window.innerHeight * 0.8;
+		currentHeight = minHeight;
+
 		if (mapContainer) {
 			map = new Map({
 				container: mapContainer,
@@ -113,26 +169,42 @@
 	<!-- Map: always visible, full screen on mobile -->
 	<div class="w-full md:w-3/5 sticky top-0 grow-1" bind:this={mapContainer}></div>
 
-	<!-- Mobile: Scrollable Card Overlay (Drawer) -->
-	<div class="fixed inset-0 z-30 flex flex-col justify-end md:hidden pointer-events-none">
-		<div class="flex-1 pointer-events-none"></div>
+	<!-- Mobile: Pullable Drawer Overlay -->
+	<div class="fixed inset-x-0 bottom-0 z-30 md:hidden pointer-events-none">
 		<div
-			class="bg-white rounded-t-2xl shadow-2xl max-h-[80vh] min-h-12 h-12 overflow-y-auto p-0 pointer-events-auto transition-all duration-300"
+			bind:this={drawerElement}
+			class="bg-white rounded-t-2xl shadow-2xl pointer-events-auto transition-all duration-300 flex flex-col"
+			style="height: {currentHeight}px"
 		>
-			<div class="flex flex-col items-center">
-				<div class="w-12 h-1.5 bg-gray-300 rounded-full mt-2 mb-2"></div>
-			</div>
-			<div class="flex flex-col gap-4 px-4 pb-4 pt-0">
-				{#each listings as listing}
-					<Card {...listing} />
-				{/each}
-			</div>
-			<div class="mt-4 px-4">
-				<Footer>
-					<p>
-						Made by <a href="https://ryuichirosuzuki.com" class="font-bold">Scooter</a> 🛵
-					</p>
-				</Footer>
+			<!-- Drawer Handle -->
+			<button 
+				class="flex flex-col items-center cursor-pointer select-none py-2 flex-shrink-0 w-full bg-transparent border-none"
+				on:touchstart={handleTouchStart}
+				on:touchmove={handleTouchMove}
+				on:touchend={handleTouchEnd}
+				on:click={toggleDrawer}
+				aria-label="Toggle location list"
+			>
+				<div class="w-12 h-1.5 bg-gray-300 rounded-full"></div>
+				<div class="text-sm text-gray-600 mt-1 font-medium">
+					{isDrawerExpanded ? 'Locations' : `${listings.length} locations`}
+				</div>
+			</button>
+
+			<!-- Scrollable Content -->
+			<div class="flex-1 overflow-y-auto px-4 pb-4">
+				<div class="flex flex-col gap-4">
+					{#each listings as listing}
+						<Card {...listing} />
+					{/each}
+				</div>
+				<div class="mt-4">
+					<Footer>
+						<p>
+							Made by <a href="https://ryuichirosuzuki.com" class="font-bold">Scooter</a> 🛵
+						</p>
+					</Footer>
+				</div>
 			</div>
 		</div>
 	</div>
